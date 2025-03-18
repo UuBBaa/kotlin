@@ -13,21 +13,12 @@ import tn.skooli.kotlin.utils.TokenManager
 class AuthViewModel(
     application: Application
 ) : AndroidViewModel(application) {
-    private val repository = AuthRepository()
-    // UI state variables
+    private val repository = AuthRepository(application)
     var token = mutableStateOf("")
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf("")
-    var fakeData = mutableStateOf<List<Map<String, String>>>(emptyList())  // New state for the list
 
-    private val tokenManager = TokenManager(application)  // Create an instance of TokenManager
-
-    init {
-        // tokenManager.clearToken()
-        // Retrieve the token when the ViewModel is created
-        token.value = tokenManager.getToken() ?: ""
-
-    }
+    private val tokenManager = TokenManager(application)
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
@@ -60,29 +51,6 @@ class AuthViewModel(
             } catch (e: Exception) {
                 error.value = "Error: ${e.localizedMessage}"
                 Log.e("AuthViewModel", "Login error", e)
-            }
-            isLoading.value = false
-        }
-    }
-
-    // Fetch the fake data list
-    fun fetchFakeData() {
-        viewModelScope.launch {
-            isLoading.value = true
-            try {
-                val response = repository.getFakeData()
-
-                if (response.isSuccessful) {
-                    fakeData.value = response.body() ?: emptyList()
-                    Log.d("AuthViewModel", "Fetched Fake Data: ${fakeData.value}")
-                } else {
-                    val errorResponse = response.errorBody()?.string() ?: "Unknown error"
-                    error.value = "Failed to fetch data: ${response.code()} - $errorResponse"
-                    Log.e("AuthViewModel", "Failed to fetch data: ${response.code()} - $errorResponse")
-                }
-            } catch (e: Exception) {
-                error.value = "Error: ${e.localizedMessage}"
-                Log.e("AuthViewModel", "Fetch Data error", e)
             }
             isLoading.value = false
         }

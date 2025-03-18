@@ -1,9 +1,6 @@
 package tn.skooli.kotlin.ui
 
-import android.app.Application
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -11,13 +8,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import tn.skooli.kotlin.viewmodel.AuthViewModel
 
 @Composable
-fun LoginScreen(application: Application, authViewModel: AuthViewModel = viewModel()) {
+fun LoginScreen(
+    navController: NavController,
+    authViewModel: AuthViewModel = viewModel()
+) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
+    val token by authViewModel.token
+    // Observe token changes and navigate when a token is set
+    LaunchedEffect(token) {
+        if (token.isNotEmpty()) {
+            navController.navigate("home") {
+                popUpTo("login") { inclusive = true } // Clears login from backstack
+            }
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,28 +61,6 @@ fun LoginScreen(application: Application, authViewModel: AuthViewModel = viewMod
         }
         if (authViewModel.error.value.isNotEmpty()) {
             Text("Error: ${authViewModel.error.value}", color = MaterialTheme.colors.error)
-        }
-        if (authViewModel.token.value.isNotEmpty()) {
-            Text("Token: ${authViewModel.token.value}")
-        }
-
-        // Fetch List button
-        Button(
-            onClick = { authViewModel.fetchFakeData() },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Fetch List")
-        }
-
-        // Display the fetched list
-        if (authViewModel.fakeData.value.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text("Fetched List:", style = MaterialTheme.typography.h6)
-            LazyColumn {
-                items(authViewModel.fakeData.value) { item ->
-                    Text("${item["id"]}: ${item["name"]}, ${item["email"]}")
-                }
-            }
         }
     }
 }

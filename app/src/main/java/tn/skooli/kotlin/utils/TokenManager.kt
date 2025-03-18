@@ -17,6 +17,6 @@ class TokenManager(context: Context) {
     }
 
     fun clearToken() {
-        prefs.edit() { remove("jwt_token") }
+        prefs.edit { remove("jwt_token") }
     }
 }
