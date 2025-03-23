@@ -1,9 +1,13 @@
 package tn.skooli.kotlin.network
 
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 // Annotation to mark protected API endpoints
 @Target(AnnotationTarget.FUNCTION)
@@ -21,4 +25,13 @@ interface ApiService {
     @AuthRequired
     @GET("api/fakedata")  // Fetch the fake data
     suspend fun getFakeData(): Response<List<Map<String, String>>>
+
+    @Multipart
+    @POST("api/upload")
+    suspend fun uploadFile(
+        @Part file: MultipartBody.Part
+    ): Response<ResponseBody>
+
+    @GET("api/files")
+    suspend fun getFiles(): Response<List<String>>
 }

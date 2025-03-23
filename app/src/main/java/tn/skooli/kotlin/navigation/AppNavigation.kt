@@ -6,9 +6,12 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tn.skooli.kotlin.ui.CurrentLocationScreen
 import tn.skooli.kotlin.ui.FakeDataScreen
+import tn.skooli.kotlin.ui.FileManagerScreen
 import tn.skooli.kotlin.ui.LoginScreen
 import tn.skooli.kotlin.ui.HomeScreen
+import tn.skooli.kotlin.ui.MapSelectionScreen
 import tn.skooli.kotlin.utils.TokenManager
 
 @Composable
@@ -20,5 +23,8 @@ fun AppNavigation(navController: NavHostController, application: Application) {
         composable("login") { LoginScreen(navController) }
         composable("home") { HomeScreen(navController) }
         composable("fakedata") { FakeDataScreen() }
+        composable("maps") { MapSelectionScreen(navController) }
+        composable("currentLocation") { CurrentLocationScreen(navController) }
+        composable("fileManager") { FileManagerScreen(navController) }
     }
 }

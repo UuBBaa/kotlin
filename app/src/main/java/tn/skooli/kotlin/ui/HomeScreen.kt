@@ -59,5 +59,26 @@ fun HomeScreen(
         ) {
             Text("Go to Fake Data")
         }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { navController.navigate("maps") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Go to Maps")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { navController.navigate("currentLocation") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Show My Location")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { navController.navigate("fileManager") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Go File manager")
+        }
     }
 }
