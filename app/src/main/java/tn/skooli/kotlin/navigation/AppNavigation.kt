@@ -12,6 +12,7 @@ import tn.skooli.kotlin.ui.FileManagerScreen
 import tn.skooli.kotlin.ui.LoginScreen
 import tn.skooli.kotlin.ui.HomeScreen
 import tn.skooli.kotlin.ui.MapSelectionScreen
+import tn.skooli.kotlin.ui.PaymentScreen
 import tn.skooli.kotlin.utils.TokenManager
 
 @Composable
@@ -26,5 +27,6 @@ fun AppNavigation(navController: NavHostController, application: Application) {
         composable("maps") { MapSelectionScreen(navController) }
         composable("currentLocation") { CurrentLocationScreen(navController) }
         composable("fileManager") { FileManagerScreen(navController) }
+        composable("payment") { PaymentScreen(navController) }
     }
 }

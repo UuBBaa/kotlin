@@ -17,6 +17,18 @@ annotation class AuthRequired
 // Data classes for request and response
 data class LoginRequest(val username: String, val password: String)
 data class LoginResponse(val token: String)
+data class PaymentRequest(
+    val amount: Double,
+    val note: String,
+    val first_name: String,
+    val last_name: String,
+    val email: String,
+    val phone: String,
+    val return_url: String?,
+    val cancel_url: String?,
+    val webhook_url: String,
+    val order_id: String?
+)
 
 interface ApiService {
     @POST("api/login")  // adjust the endpoint path as needed
@@ -34,4 +46,14 @@ interface ApiService {
 
     @GET("api/files")
     suspend fun getFiles(): Response<List<String>>
+
+    @POST("api/registerToken")
+    suspend fun registerToken(@Body tokenData: Map<String, String>): Response<Unit>
+
+    @POST("api/paymee/create-payment")
+    suspend fun createPayment(
+        @Body paymentRequest: PaymentRequest
+    ): Response<Map<String, Any>>
+
+
 }

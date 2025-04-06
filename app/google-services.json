@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "855073218059",
+    "project_id": "kotlin-caa25",
+    "storage_bucket": "kotlin-caa25.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855073218059:android:74c9abd70b2a6eaf7ef10e",
+        "android_client_info": {
+          "package_name": "tn.skooli.kotlin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwQcDrM0B7MMA1JVGlx_V6bVoiYcmsk3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

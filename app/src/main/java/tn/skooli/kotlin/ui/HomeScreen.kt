@@ -80,5 +80,16 @@ fun HomeScreen(
         ) {
             Text("Go File manager")
         }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                // Navigate to Payment Screen or call a ViewModel function to initiate payment
+                navController.navigate("payment")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Pay with Paymee")
+        }
     }
 }
