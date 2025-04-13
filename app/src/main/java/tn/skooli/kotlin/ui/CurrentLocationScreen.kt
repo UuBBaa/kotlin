@@ -58,7 +58,7 @@ fun CurrentLocationScreen(navController: NavController) {
             val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             try {
                 // Get the last known location from the GPS provider
-                val lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                val lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 lastKnownLocation?.let {
                     // If location is available, update the location state
                     location = GeoPoint(it.latitude, it.longitude)

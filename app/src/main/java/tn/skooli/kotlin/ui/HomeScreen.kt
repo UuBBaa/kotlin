@@ -91,5 +91,19 @@ fun HomeScreen(
         ) {
             Text("Pay with Paymee")
         }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                // Example coordinates near downtown San Francisco
+                val lat = 37.7749
+                val lon = -122.4194
+                navController.navigate("route/$lat/$lon")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Show Route to San Francisco")
+        }
+
     }
 }
